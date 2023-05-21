@@ -1,6 +1,6 @@
 pipeline {
     agent any
-    params {
+    parameters {
         string(name: 'bucket_uel', defaultValue: 's3://terraform-buckt-shay-pub')
     }
 
