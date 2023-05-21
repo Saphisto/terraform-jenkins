@@ -3,6 +3,7 @@ pipeline {
     stages {
         stage('Terraform destroy') {
             steps {
+                sh 'terraform init'
                 sh 'cd /var/jenkins_home/workspace/terraform_jenkins'
                 sh 'aws s3 rm s3://terraform-buckt-shay-pub/graph.png'
                 sh 'terraform destroy --auto-approve'
