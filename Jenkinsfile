@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    params {
+        string(name: 'bucket_uel', defaultValue: 's3://terraform-buckt-shay-pub')
+    }
 
     stages {
         stage('Terraform init') {
@@ -15,8 +18,8 @@ pipeline {
         stage('Graph creation') {
             steps {
                 sh "terraform graph > ${params.graph_file}"
-                sh "dot -Tpng graph.dot -o ${params.graph_omg}"
-                sh "aws s3 cp ./${params.graph_img} s3://terraform-buckt-shay-pub"
+                sh "dot -Tpng graph.dot -o ${params.graph_img}"
+                sh "aws s3 cp ./${params.graph_img} ${params.bucket_url}"
             }
         }
     }
